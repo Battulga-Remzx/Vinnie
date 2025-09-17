@@ -2,11 +2,11 @@ console.clear()
 const Discord = require('discord.js');
 
 const client = new Discord.Client({
-  intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_MESSAGES, Discord.Intents.FLAGS.DIRECT_MESSAGES]
-}); // DISCORD.JS V13
+  intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMembers, Discord.GatewayIntentBits.GuildBans, Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.DirectMessages, Discord.GatewayIntentBits.MessageContent]
+}); // DISCORD.JS V14
 
 
-const Eco = require("quick.eco");
+const Eco = require("./lib/ecoCompat");
 client.eco = new Eco.Manager(); // quick.eco
 client.db = Eco.db; // quick.db
 client.config = require("./botConfig");
@@ -46,7 +46,7 @@ fs.readdir("./commands/", (err, files) => {
 client.on('guildMemberAdd', member => {
   member.roles.add(member.guild.roles.cache.find(i => i.name === 'User'));
 
-  const welcomeEmbed = new Discord.MessageEmbed()
+  const welcomeEmbed = new Discord.EmbedBuilder()
 
   welcomeEmbed.setColor('RED')
   welcomeEmbed.setTitle(`**${member.user.username}** is joined ${member.guild.name}. **${member.guild.memberCount}**th member of server`)
@@ -57,8 +57,8 @@ client.on('guildMemberAdd', member => {
 })
 
 client.on('messageCreate', (message) => {
-  const { MessageEmbed } = require('discord.js');
-  let embed = new MessageEmbed()
+  const { EmbedBuilder } = require('discord.js');
+  let embed = new EmbedBuilder()
     .setDescription("hello")
 
   if (message.content == 'hi') {
