@@ -16,10 +16,7 @@ exports.execute = async (client, message, args) => {
   if (bank == null) bank = 0;
 
   if (money == null) money = 0;
-  let cD = client.emoji.colorDiscord;
-  let right = client.emoji.right;
   let medal = client.image.noReward;
-  let emoji = client.emoji;
   if (userBalance.position == 1) {
     userBalance.position = '1st 🥇';
     medal = client.image.onePlace;
@@ -34,18 +31,19 @@ exports.execute = async (client, message, args) => {
     medal = client.image.noReward;
   }
   const embed = new MessageEmbed()
-    .setAuthor('PROFILE INFORMATION', user.displayAvatarURL())
-    .setDescription(`${right}**USERNAME**: ${user.tag}
+    .setAuthor({ name: "Profile", iconURL: client.user.displayAvatarURL() })
 
-${right}**VIP PASS**: ${vip}
+    .setDescription(`**USERNAME**: ${user.tag}
 
-${right}**MONEY**: $${money} ${emoji.tugrug}
+**VIP PASS**: ${vip}
 
-${right}**BANK**: $${bank} 🏦
+**MONEY**: $${money}
 
-${right}**LEADERBOARD MONEY**: ${userBalance.position}`)
+**BANK**: $${bank} 🏦
+
+**LEADERBOARD MONEY**: ${userBalance.position}`)
     .setColor("WHITE")
-    .setFooter(message.guild.name, message.guild.iconURL())
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
     .setTimestamp()
     .setThumbnail(medal)
     .setTimestamp();

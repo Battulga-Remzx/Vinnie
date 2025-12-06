@@ -2,7 +2,6 @@ const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
 
 exports.execute = (client, message, args) => {
   let user = message.author;
-  let emote = client.emoji;
   let fSpin = "🎲";
   let sSpin = "🎲";
   let lSpin = "🎲";

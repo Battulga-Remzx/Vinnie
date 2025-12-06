@@ -8,11 +8,7 @@ exports.execute = (client, message, args) => {
   //Database
   let money = client.db.fetch(`money_${user.id}`)
   let bank = client.db.fetch(`bank_${user.id}`);
-
-  // emoji call
-  let right = client.emoji.right;
-  let cD = client.emoji.colorDiscord;
-  let tugrug = client.emoji.tugrug;
+  
 
   //Prints
   if (money === null) money = 0;
@@ -22,12 +18,12 @@ exports.execute = (client, message, args) => {
   let errAmount = new MessageEmbed()
     .setTitle(`⚠️ **WARNING** ⚠️`)
     .setColor('RED')
-    .setFooter(message.guild.name + ' bank', message.guild.iconURL())
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
     .setDescription(`Enter amount or ALL command 
 example:
-${right}${client.config.prefix}wd 100
+${client.config.prefix}wd 100
 or
-${right}${client.config.prefix}wd all`);
+${client.config.prefix}wd all`);
 
   let evenNum = new MessageEmbed()
     .setTitle(`⚠️ **WARNING** ⚠️`)
@@ -39,31 +35,31 @@ ${right}${client.config.prefix}wd all`);
     .setColor('RED')
     .setDescription(`Not enough your money in bank
 ===============
-${right}Bank: $${bank} ${tugrug} have`);
+Bank: $${bank} have`);
 
   let allMoney = new MessageEmbed()
-    .setAuthor(client.user.tag, client.user.displayAvatarURL())
-    .setTitle(`${cD} **Success** ${cD}`)
+    .setAuthor({ name: "WITHDRAW", iconURL: client.user.displayAvatarURL() })
+    .setTitle(`**Success** `)
     .setColor('GREEN')
     .setTimestamp()
-    .setFooter(user.tag, user.displayAvatarURL())
-    .setDescription(`$${parseInt(bank)} ${tugrug} IS WITHDRAW.
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
+    .setDescription(`$${parseInt(bank)}  IS WITHDRAW.
 ===============
-${right}Current Money: $${money + parseInt(bank)} ${tugrug}
+Current Money: $${money + parseInt(bank)}
 ===============
-${right}Current Bank: $${bank - parseInt(bank)} ${tugrug}`)
+Current Bank: $${bank - parseInt(bank)}`)
 
   let embed = new MessageEmbed()
-    .setAuthor(message.guild.name + ' bank', message.guild.iconURL())
-    .setTitle(`${cD} **Success** ${cD}`)
+    .setAuthor({ name: "WITHDRAW", iconURL: client.user.displayAvatarURL() })
+    .setTitle(`**Success**`)
     .setColor('GREEN')
     .setTimestamp()
-    .setFooter(user.tag, user.displayAvatarURL())
-    .setDescription(`$${parseInt(args[0])} ${tugrug} IS WITHDRAW.
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
+    .setDescription(`$${parseInt(args[0])} IS WITHDRAW.
 ===============
-${right}Current Money: $${money + parseInt(args[0])} ${tugrug}
+Current Money: $${money + parseInt(args[0])} 
 ===============
-${right}Current Bank: $${bank - parseInt(args[0])} ${tugrug}`)
+Current Bank: $${bank - parseInt(args[0])}`)
 
   //Program
   if (!args[0]) {

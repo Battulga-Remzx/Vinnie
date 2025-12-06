@@ -20,7 +20,7 @@ exports.execute = (client, message, args) => {
         const embed = new MessageEmbed()
           .setTitle('🔮 Question')
           .setDescription(question)
-          .addField('Answer', randomAnswer)
+          .addFields('Answer', randomAnswer)
           .setColor('RANDOM');
 
         msg.edit({ content: '', embeds: [embed] });

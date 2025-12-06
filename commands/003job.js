@@ -4,7 +4,6 @@ const cooldown = new Set();
 exports.execute = (client, message, args) => {
 
   const user = message.author;
-  const emoji = client.emoji;
   const jobName = args[0];
 
 
@@ -26,16 +25,16 @@ exports.execute = (client, message, args) => {
   const jobMenu = new MessageEmbed()
     .setTitle(`**Jobs Menu**`)
     .setColor('BLUE')
-    .setFooter('JOB LIST')
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
     .setTimestamp()
     .setImage('https://cdn.glitch.global/1cf686b0-913a-46e4-97b7-1fdc280c579e/shutterstock_1055044370.jpg?v=1661025445939')
-    .setDescription(`👮‍♂️POLICE ${emoji.right} **${client.config.prefix}job police**
+    .setDescription(`👮‍♂️POLICE **${client.config.prefix}job police**
  
-👩‍⚕️DOCTOR ${emoji.right} **${client.config.prefix}job doctor**
+👩‍⚕️DOCTOR **${client.config.prefix}job doctor**
 
-⛏️MINER ${emoji.right} **${client.config.prefix}job miner**
+⛏️MINER **${client.config.prefix}job miner**
 
-👹GANG ${emoji.right} **${client.config.prefix}job gang**`)
+👹GANG **${client.config.prefix}job gang**`)
 
   if (police == true) {
     workingName = '**POLICE** 👮‍♂️'
@@ -105,7 +104,7 @@ exports.execute = (client, message, args) => {
     client.db.set(`gang_${user.id}`, true)
     message.channel.send('You are joined **GANG** 👹')
   } else {
-    message.channel.send(`${emoji.colorDiscord} i didnʼt find **${args[0]}** job. Please check and try again`).then(msg => {
+    message.channel.send(`i didnʼt find **${args[0]}** job. Please check and try again`).then(msg => {
       msg.edit({ embeds: [jobMenu] })
     })
   }

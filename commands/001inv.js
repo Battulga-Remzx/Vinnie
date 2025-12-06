@@ -2,13 +2,12 @@ const cooldown = new Set();
 const { MessageEmbed } = require('discord.js')
 exports.execute = (client, message, args) => {
   let author = message.author;
-  let emoji = client.emoji
   let items = {
     Food: client.db.fetch(`food_${author.id}`),
     Water: client.db.fetch(`water_${author.id}`),
     EnergyDrink: client.db.fetch(`energyD_${author.id}`),
     Phone: client.db.fetch(`phone_${author.id}`),
-    Money: client.db.fetch(`money_${author.id}`) + emoji.tugrug,
+    Money: client.db.fetch(`money_${author.id}`),
     CoinP: client.db.fetch(`coin_${author.id}`),
     Key: client.db.fetch(`key_${author.id}`),
     Tool: client.db.fetch(`tool_${author.id}`),
@@ -26,7 +25,7 @@ exports.execute = (client, message, args) => {
       key = '';
       items[key] = '';
     } else {
-      content += `**${emoji.right} ${key}** : ${items[key]}\n\n`
+      content += `**${key}** : ${items[key]}\n\n`
     }
   }
 
@@ -36,7 +35,7 @@ exports.execute = (client, message, args) => {
     .setDescription(content)
     .setThumbnail(author.displayAvatarURL())
 
-  message.channel.send(`${emoji.right} I will send to your **DM**`)
+  message.channel.send(`I will send to your **DM**`)
   setTimeout(() => {
     message.author.send({ embeds: [inventory] })
   }, 3000)

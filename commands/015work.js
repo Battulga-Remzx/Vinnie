@@ -6,7 +6,6 @@ const robCd = new Set();
 exports.execute = (client, message, args) => {
   const user = message.author;
   let member = message.mentions.members.first();
-  let emoji = client.emoji;
 
   const police = client.db.fetch(`police_${user.id}`);
   const doctor = client.db.fetch(`doctor_${user.id}`);
@@ -14,7 +13,7 @@ exports.execute = (client, message, args) => {
   const gang = client.db.fetch(`gang_${user.id}`);
 
   let miningEmbed = new MessageEmbed()
-    .setDescription(`. . . ${emoji.mining} ${user.tag} mining`)
+    .setDescription(`. . . ${user.tag} mining`)
     .setColor('ORANGE')
 
   let miningCd = 10000;
@@ -22,37 +21,37 @@ exports.execute = (client, message, args) => {
   let fndAntimatter = new MessageEmbed()
     .setTitle(`Congratulations`)
     .setDescription(`${user.tag} 
-  ||${emoji.antimatter} You found **ANTIMATTER**||`)
+  ||You found **ANTIMATTER**||`)
     .setColor('ORANGE')
-    .setFooter('Click to spoiler ⬆️', user.displayAvatarURL())
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
 
   let fndDiamond = new MessageEmbed()
     .setTitle(`Congratulations`)
     .setDescription(`${user.tag} 
-  ||${emoji.diamond} You found **DIAMOND**||`)
+  ||You found **DIAMOND**||`)
     .setColor('ORANGE')
-    .setFooter('Click to spoiler ⬆️', user.displayAvatarURL())
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
 
   let fndGold = new MessageEmbed()
     .setTitle(`Congratulations`)
     .setDescription(`${user.tag} 
-  ||${emoji.gold} You found **GOLD**||`)
+  ||You found **GOLD**||`)
     .setColor('ORANGE')
-    .setFooter('Click to spoiler ⬆️', user.displayAvatarURL())
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
 
   let fndIron = new MessageEmbed()
     .setTitle(`Congratulations`)
     .setDescription(`${user.tag} 
-  ||${emoji.iron} You found **IRON**||`)
+  ||You found **IRON**||`)
     .setColor('ORANGE')
-    .setFooter('Click to spoiler ⬆️', user.displayAvatarURL())
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
 
   let fndCoal = new MessageEmbed()
     .setTitle(`Congratulations`)
     .setDescription(`${user.tag} 
-  ||${emoji.coal} You found **COAL**|| `)
+  ||You found **COAL**|| `)
     .setColor('ORANGE')
-    .setFooter('Click to spoiler ⬆️', user.displayAvatarURL())
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
 
   if (police == true) {
     if (!message.channel.id.includes('1010653830645547098')) {
@@ -153,7 +152,6 @@ exports.execute = (client, message, args) => {
     let tool = client.db.fetch(`robTool_${user.id}`)
     if (tool == null) tool = 1;
     let amount = Math.floor(Math.random() * 2000) + 1;
-    let tugrug = client.emoji.tugrug;
     let robCall;
     let callRandom = Math.floor(Math.random() * 4) + 1;
     if (callRandom == 1) {
@@ -180,7 +178,7 @@ exports.execute = (client, message, args) => {
     }, 60000)
     message.delete();
     message.channel.send(`${robCall} was robbed ${member}
-    ${amount}${tugrug} robbed.`)
+    ${amount} robbed.`)
   } else {
     message.channel.send('You not working')
   }

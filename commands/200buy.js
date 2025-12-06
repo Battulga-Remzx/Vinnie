@@ -3,8 +3,6 @@ const { MessageEmbed } = require('discord.js');
 exports.execute = (client, message, args) => {
   
   const author = message.author;
-  const coinP = client.emoji.coinP;
-  const emoji = client.emoji;
   const items = client.buyprice;
   const money = client.db.fetch(`money_${author.id}`);
   const coinDb = client.db.fetch(`coinP_${author.id}`)
@@ -13,14 +11,14 @@ exports.execute = (client, message, args) => {
   let content = [];
 
   for (var key in items) {
-    content += `**${emoji.right} ${key}** -  ${items[key]}${emoji.tugrug}\n\n`
+    content += `**${key}** -  ${items[key]}\n\n`
   }
 
   let itemMenu = new MessageEmbed()
     .setTitle(message.guild.name + " store")
     .setDescription(content)
     .setColor("BLURPLE")
-    .setFooter(`${client.prefix}buy <item>`, author.displayAvatarURL())
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
 
   const item = args[0];
   const amount = parseInt(args[1]);

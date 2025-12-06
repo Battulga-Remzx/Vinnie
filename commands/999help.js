@@ -2,24 +2,31 @@ const { MessageEmbed } = require("discord.js");
 
 exports.execute = async (client, message, args) => {
 
-  let right = client.emoji.right;
-  let yellowFire = client.emoji.yellowFire;
-
+  // Embed үүсгэх
   const embed = new MessageEmbed()
-    .setAuthor("Commands", client.user.displayAvatarURL())
+    .setAuthor({ name: "Commands", iconURL: client.user.displayAvatarURL() })
     .setDescription(`Total Commands: ${client.commands.size}`)
     .setColor("#EB96EB")
-    .setTimestamp()
-    .setThumbnail(client.user.displayAvatarURL)
-    .setFooter(message.author.tag, message.author.displayAvatarURL());
+    .setThumbnail(client.user.displayAvatarURL())
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
+    .setTimestamp();
+
+  // Бүх command-г embed-д нэмэх
   client.commands.forEach(cmd => {
-    embed.addField(`${cmd.help.name}`, `${right}Aliases: ${cmd.help.aliases.join(", ") || "None"}\n${right}Usage: \`${client.prefix}${cmd.help.usage}\``, true);
+    embed.addFields({
+      name: cmd.help.name,
+      value: `**Aliases:** ${cmd.help.aliases.join(", ") || "None"}\n` +
+             `**Usage:** \`${client.config.prefix}${cmd.help.usage}\``,
+      inline: true
+    });
   });
+
+  // Embed-г илгээх
   return message.channel.send({ embeds: [embed] });
-}
+};
 
 exports.help = {
   name: "help",
   aliases: ["h"],
-  usage: `help`
-}
+  usage: "help"
+};

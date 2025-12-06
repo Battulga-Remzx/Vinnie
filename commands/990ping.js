@@ -8,15 +8,14 @@ exports.execute = (client, message, args) => {
   const user = message.author;
   const yourping = new Date().getTime() - message.createdTimestamp
   const botping = Math.round(client.ws.ping)
-  const blueFire = client.emoji.rainbowToRight
   const embed = new MessageEmbed()
-    .setTitle(client.emoji.colorDiscord + ' **Pong** ' + client.emoji.colorDiscord)
+    .setTitle(' **Pong** ')
     .setColor('WHITE')
     .setTimestamp()
-    .setFooter('by: ' + user.tag, user.displayAvatarURL())
-    .setDescription(`${client.emoji.right} Your Ping: ${yourping}ms
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
+    .setDescription(` Your Ping: ${yourping}ms
 ====================
-${client.emoji.right} Bot Ping: ${botping}ms`)
+Bot Ping: ${botping}ms`)
 
   let cooldown = client.db.fetch(`pingCd_${user.id}`);
   let cd = false;

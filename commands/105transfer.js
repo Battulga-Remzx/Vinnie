@@ -12,9 +12,6 @@ exports.execute = (client, message, args) => {
   let myMoney = client.db.fetch(`money_${me.id}`);
 
   if (myMoney == null) myMoney = 0;
-  //emoji
-  let right = client.emoji.right;
-  let tugrug = client.emoji.tugrug;
 
   //Embeds
   let errUser = new MessageEmbed()
@@ -37,19 +34,19 @@ exports.execute = (client, message, args) => {
     .setColor('RED')
     .setDescription(`Not enough your money
 ===============
-${right}Money: $${myMoney} ${tugrug} have`)
+Money: $${myMoney} have`)
 
   let success = new MessageEmbed()
     .setTitle(`SUCCESS`)
-    .setAuthor(client.user.tag, client.user.displayAvatarURL())
+    .setAuthor({ name: "TRANSFER", iconURL: client.user.displayAvatarURL() })
     .setColor('GREEN')
     .setTimestamp()
-    .setFooter('TRANSFER SUCCESS', message.guild.iconURL())
-    .setDescription(`${right}from: ${me}
+    .setFooter({ text: "TRANSFER SUCCESS", iconURL: message.author.displayAvatarURL() })
+    .setDescription(`from: ${me}
 ===============
-send $${amount} ${tugrug}
+send $${amount}
 ===============
-${right}to: ${user} 
+to: ${user} 
 `)
   //Program
   if (!user) {

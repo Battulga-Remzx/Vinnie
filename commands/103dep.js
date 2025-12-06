@@ -9,11 +9,6 @@ exports.execute = (client, message, args) => {
   let money = client.db.fetch(`money_${user.id}`)
   let bank = client.db.fetch(`bank_${user.id}`);
 
-  // emoji call
-  let right = client.emoji.right;
-  let cD = client.emoji.colorDiscord;
-  let tugrug = client.emoji.tugrug;
-
   //Prints
   if (money === null) money = 0;
   if (bank === null) bank = 0;
@@ -22,12 +17,12 @@ exports.execute = (client, message, args) => {
   let errAmount = new MessageEmbed()
     .setTitle(`⚠️ **WARNING** ⚠️`)
     .setColor('RED')
-    .setFooter(message.guild.name + ' bank', message.guild.iconURL())
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
     .setDescription(`Enter amount or ALL command 
 example:
-${right}${client.config.prefix}dep 100
+${client.config.prefix}dep 100
 or
-${right}${client.config.prefix}dep all`);
+${client.config.prefix}dep all`);
 
   let evenNum = new MessageEmbed()
     .setTitle(`⚠️ **WARNING** ⚠️`)
@@ -39,31 +34,31 @@ ${right}${client.config.prefix}dep all`);
     .setColor('RED')
     .setDescription(`Not enough your money
 ===============
-${right}Money: $${money} ${tugrug} have`);
+Money: $${money} have`);
 
   let allMoney = new MessageEmbed()
-    .setAuthor(client.user.tag, client.user.displayAvatarURL())
+    .setAuthor({ name: "Deposit", iconURL: client.user.displayAvatarURL() })
     .setTitle(`${cD} **Success** ${cD}`)
     .setColor('GREEN')
     .setTimestamp()
-    .setFooter(user.tag, user.displayAvatarURL())
-    .setDescription(`$${parseInt(money)} ${tugrug} IS DEPOSITED.
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
+    .setDescription(`$${parseInt(money)}  IS DEPOSITED.
 ===============
-${right}Current Money: $${money - parseInt(money)} ${tugrug}
+Current Money: $${money - parseInt(money)} 
 ===============
-${right}Current Bank: $${bank + parseInt(money)} ${tugrug}`)
+Current Bank: $${bank + parseInt(money)} `)
 
   let embed = new MessageEmbed()
-    .setAuthor(message.guild.name + ' bank', message.guild.iconURL())
+    .setAuthor({ name: "Deposit", iconURL: client.user.displayAvatarURL() })
     .setTitle(`${cD} **Success** ${cD}`)
     .setColor('GREEN')
     .setTimestamp()
-    .setFooter(user.tag, user.displayAvatarURL())
-    .setDescription(`$${parseInt(args[0])} ${tugrug} IS DEPOSITED.
+    .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() })
+    .setDescription(`$${parseInt(args[0])} IS DEPOSITED.
 ===============
-${right}Current Money: $${money - parseInt(args[0])} ${tugrug}
+Current Money: $${money - parseInt(args[0])} 
 ===============
-${right}Current Bank: $${bank + parseInt(args[0])} ${tugrug}`)
+Current Bank: $${bank + parseInt(args[0])}`)
 
   //Program
   if (!args[0]) {
